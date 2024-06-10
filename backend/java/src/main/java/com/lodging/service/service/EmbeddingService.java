@@ -13,6 +13,7 @@ import com.lodging.service.model.Place;
 
 @Service
 public class EmbeddingService implements LodgingService {
+
     private static final float MATCH_THRESHOLD = 0.7f;
     private static final int MATCH_CNT = 3;
 
@@ -27,6 +28,7 @@ public class EmbeddingService implements LodgingService {
     }
 
     public List<Place> searchPlaces(String prompt) {
+
         List<Double> promptEmbedding = aiClient.embed(prompt);
         
         StatementSpec query = jdbcClient.sql(
@@ -39,5 +41,7 @@ public class EmbeddingService implements LodgingService {
                 .param("match_cnt", MATCH_CNT);
 
         return query.query(Place.class).list();
+
     }
+
 }

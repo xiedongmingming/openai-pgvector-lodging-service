@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+
 import com.lodging.service.model.Place;
 
 @Service
@@ -33,14 +34,17 @@ public class ChatService implements LodgingService {
 
     @Override
     public List<Place> searchPlaces(String prompt) {
+
         Prompt chatPrompt = new Prompt(List.of(SYSTEM_MESSAGE, new UserMessage(prompt)));
 
         ChatResponse response = aiClient.call(chatPrompt);
 
         String rawJson = response.getResult().getOutput().getContent();
+
         Place[] places = new Gson().fromJson(rawJson, Place[].class);
 
         return List.of(places);
+
     }
 
 }

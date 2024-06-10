@@ -136,3 +136,5 @@ package-lock.json
 *.class
 target/
 .vscode/settings.json
+backend/java/src/main/resources/application.properties
+backend/java/.idea
